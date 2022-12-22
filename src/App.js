@@ -1,6 +1,7 @@
 import './App.css';
 import React, { useState } from 'react';
 import Naive from "./components/Naive";
+import RabinKarp from './components/RabinKarp';
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>  
         {submitted && <Naive text={text} pattern={pattern} />}
+        {submitted && <RabinKarp text={text} pattern={pattern} />}
       </div> 
     </div>
   );
