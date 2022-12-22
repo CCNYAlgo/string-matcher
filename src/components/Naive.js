@@ -69,7 +69,7 @@ function Naive(props){
             })}
             <br></br>
             <br></br>
-            <p>It took {endTime - startTime} ms to complete</p>
+            <p>It took {endTime - startTime} ms to complete using Naive Algorithm</p>
         </div>
     );
 }
