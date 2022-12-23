@@ -58,12 +58,13 @@ function RabinKarp(props)
 
     let txt = props.text;
     let pat = props.pattern;
-    let patLen = pat.length;
 
     startTime = performance.now();
     let indices = search(txt, pat, q);
     endTime = performance.now();
 
+/*
+    let patLen = pat.length;
     let substrings = [];
     let index = indices[0];
 
@@ -79,22 +80,26 @@ function RabinKarp(props)
 
     index = indices[indices.length - 1] + patLen;
     substrings.push(txt.substring(index, txt.length));
-
-    return(
-        <div>
-            {/* <p>Pattern found at indices: </p>
-            {indices.join(", ")}
-            <br></br>
-            <br></br>
-            {substrings.map((elem, i) => {
-                if(i % 2 !== 0) return <mark><b>{elem}</b></mark>
-                return elem
-            })}
-            <br></br>
-            <br></br> */}
-            <p>It took {1/(endTime - startTime)} ms to complete using Rabin-Karp Algorithm</p>
-        </div>
-    );
+*/
+    if (indices.length === 0)
+        return;
+    else {
+        return(
+            <div>
+                {/* <p>Pattern found at indices: </p>
+                {indices.join(", ")}
+                <br></br>
+                <br></br>
+                {substrings.map((elem, i) => {
+                    if(i % 2 !== 0) return <mark><b>{elem}</b></mark>
+                    return elem
+                })}
+                <br></br>
+                <br></br> */}
+                <p>It took {1/(endTime - startTime)} ms to complete using Rabin-Karp Algorithm</p>
+            </div>
+        );
+    }
 }
 
 export default RabinKarp;

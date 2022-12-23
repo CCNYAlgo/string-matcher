@@ -34,12 +34,12 @@ function Naive(props){
 
     let txt = props.text;
     let pat = props.pattern;
-    let patLen = pat.length;
 
     startTime = performance.now();
     let indices = search(txt, pat);
     endTime = performance.now();
 
+    let patLen = pat.length;
     let substrings = [];
     let index = indices[0];
 
@@ -56,21 +56,29 @@ function Naive(props){
     index = indices[indices.length - 1] + patLen;
     substrings.push(txt.substring(index, txt.length));
 
-    return(
-        <div>
-            <p className="results-title">Pattern found at indices: </p>
-            {indices.join(", ")}
-            <br></br>
-            <br></br>
-            {substrings.map((elem, i) => {
-                if(i % 2 !== 0) return <mark key={i}><b>{elem}</b></mark>
-                return <span key={i}>{elem}</span>
-            })}
-            <br></br>
-            <br></br>
-            <p>It took {1/(endTime - startTime)} ms to complete using Naive Algorithm</p>
-        </div>
-    );
+    if (indices.length === 0)
+        return(
+            <div>
+                <p className="results-title">Pattern is not found in this text </p>
+            </div>
+        )
+    else {
+        return(
+            <div>
+                <p className="results-title">Pattern found at indices: </p>
+                {indices.join(", ")}
+                <br></br>
+                <br></br>
+                {substrings.map((elem, i) => {
+                    if(i % 2 !== 0) return <mark key={i}><b>{elem}</b></mark>
+                    return <span key={i}>{elem}</span>
+                })}
+                <br></br>
+                <br></br>
+                <p>It took {1/(endTime - startTime)} ms to complete using Naive Algorithm</p>
+            </div>
+        );
+    }
 }
 
 export default Naive;
