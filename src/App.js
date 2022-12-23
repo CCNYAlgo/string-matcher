@@ -16,24 +16,24 @@ function App() {
   }
 
   return (
-    <div>
-      <h1 className="container">String Matcher</h1>
-      <div className='container'>
-        <form onSubmit={handleSubmit}>
+    <div className='container body'>
+        <h1 id="title">Exact String Matcher</h1>
+        <br></br>
+        <form onSubmit={handleSubmit} className="form">
           <div className="mb-3">
-            <label htmlFor="text" className="form-label">Text</label>
-            <textarea className="form-control" id="text" value={text} onChange={(e) => {setText(e.target.value); setSubmitted(false);}}/>
+            <label htmlFor="text" className="form-label">Text (Case-sensitive)</label>
+            <textarea className="form-control" id="text" placeholder="Enter text here" value={text} onChange={(e) => {setText(e.target.value); setSubmitted(false);}}/>
           </div>
           <div className="mb-3">
-            <label htmlFor="pattern" className="form-label">Pattern</label>
-            <input type="text" className="form-control" id="pattern" value={pattern} onChange={(e) => {setPattern(e.target.value); setSubmitted(false);}}/>
+            <label htmlFor="pattern" className="form-label">Pattern (Case-sensitive)</label>
+            <input type="text" className="form-control" placeholder="Enter pattern here" id="pattern" value={pattern} onChange={(e) => {setPattern(e.target.value); setSubmitted(false);}}/>
           </div>
-          <button type="submit" className="btn btn-primary">Submit</button>
-        </form>  
+          <button type="submit" className="btn btn-primary" id="btn-submit">Submit</button>
+        </form>
+        <br></br>  
         {submitted && <Naive text={text} pattern={pattern} />}
         {submitted && <RabinKarp text={text} pattern={pattern} />}
         {submitted && <FiniteAuto text={text} pattern={pattern} />}
-      </div> 
     </div>
   );
 }
