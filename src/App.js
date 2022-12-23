@@ -2,6 +2,7 @@ import './App.css';
 import React, { useState } from 'react';
 import Naive from "./components/Naive";
 import RabinKarp from './components/RabinKarp';
+import FiniteAuto from './components/FiniteAuto';
 
 function App() {
 
@@ -27,10 +28,11 @@ function App() {
             <label htmlFor="pattern" className="form-label">Pattern</label>
             <input type="text" className="form-control" id="pattern" value={pattern} onChange={(e) => {setPattern(e.target.value); setSubmitted(false);}}/>
           </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" className="btn btn-primary">Submit</button>
         </form>  
         {submitted && <Naive text={text} pattern={pattern} />}
         {submitted && <RabinKarp text={text} pattern={pattern} />}
+        {submitted && <FiniteAuto text={text} pattern={pattern} />}
       </div> 
     </div>
   );

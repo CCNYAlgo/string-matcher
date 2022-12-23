@@ -2,18 +2,14 @@ import React from "react";
 
 function RabinKarp(props) 
 {
-    let startTime;
-    let endTime;
+    let startTime = 0;
+    let endTime = 0;
 
     let q = 101; // prime number
     let d = 256; // number of characters in the input alphabet
 
     function search(txt, pat, q) 
     {
-        startTime = 0;
-        endTime = 0;
-        startTime = performance.now();
-
         let M = pat.length;
         let N = txt.length;
         let i;
@@ -56,7 +52,6 @@ function RabinKarp(props)
                     t = (t + q);
             }
         }
-        endTime = performance.now();
 
         return shifts;
     }
@@ -64,7 +59,11 @@ function RabinKarp(props)
     let txt = props.text;
     let pat = props.pattern;
     let patLen = pat.length;
+
+    startTime = performance.now();
     let indices = search(txt, pat, q);
+    endTime = performance.now();
+
     let substrings = [];
     let index = indices[0];
 

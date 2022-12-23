@@ -2,16 +2,13 @@ import React from "react";
 
 function Naive(props){
 
-    let startTime;
-    let endTime;
+    let startTime = 0;
+    let endTime = 0;
 
     // Javascript program for Naive Pattern Searching
 
     function search(txt, pat)
     {
-        startTime = 0;
-        endTime = 0;
-        startTime = performance.now();
 
         let M = pat.length;
         let N = txt.length;
@@ -32,15 +29,17 @@ function Naive(props){
                 shifts.push(i);
         }
 
-        endTime = performance.now();
-
         return shifts;
     }
 
     let txt = props.text;
     let pat = props.pattern;
     let patLen = pat.length;
+
+    startTime = performance.now();
     let indices = search(txt, pat);
+    endTime = performance.now();
+
     let substrings = [];
     let index = indices[0];
 
@@ -64,8 +63,8 @@ function Naive(props){
             <br></br>
             <br></br>
             {substrings.map((elem, i) => {
-                if(i % 2 !== 0) return <mark><b>{elem}</b></mark>
-                return elem
+                if(i % 2 !== 0) return <mark key={i}><b>{elem}</b></mark>
+                return <span key={i}>{elem}</span>
             })}
             <br></br>
             <br></br>
