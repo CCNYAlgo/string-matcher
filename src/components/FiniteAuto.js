@@ -77,26 +77,49 @@ function FiniteAuto(props){
 
     let pat = props.pattern.split("");
     let txt = props.text.split("");
+
     startTime = performance.now();
     let indices = search(pat, txt);
     endTime = performance.now();
 
+/*
+    let patLen = pat.length;
+    let substrings = [];
+    let index = indices[0];
 
-    return(
-        <div>
-            {/* <p>Pattern found at indices: </p>
-            {indices.join(", ")}
-            <br></br>
-            <br></br>
-            {substrings.map((elem, i) => {
-                if(i % 2 !== 0) return <mark><b>{elem}</b></mark>
-                return elem
-            })}
-            <br></br>
-            <br></br> */}
-            <p>It took {1/(endTime - startTime)} ms to complete using Finite Automaton Algorithm</p>
-        </div>
-    );
+    substrings.push(txt.substring(0, index));
+    substrings.push(txt.substring(index, index + patLen));
+    for(let i = 1; i < indices.length; i++){
+        index = indices[i];
+        let prev = indices[i-1] + patLen;
+
+        substrings.push(txt.substring(prev, index));
+        substrings.push(txt.substring(index, index + patLen));
+    }
+
+    index = indices[indices.length - 1] + patLen;
+    substrings.push(txt.substring(index, txt.length));
+*/
+
+    if (indices.length === 0)
+        return;
+    else {
+        return(
+            <div>
+                {/* <p>Pattern found at indices: </p>
+                {indices.join(", ")}
+                <br></br>
+                <br></br>
+                {substrings.map((elem, i) => {
+                    if(i % 2 !== 0) return <mark><b>{elem}</b></mark>
+                    return elem
+                })}
+                <br></br>
+                <br></br> */}
+                <p>It took {1/(endTime - startTime)} ms to complete using Finite Automaton Algorithm</p>
+            </div>
+        );
+    }
 }
 
 export default FiniteAuto;
