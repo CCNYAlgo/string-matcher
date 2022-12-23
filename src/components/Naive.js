@@ -58,7 +58,7 @@ function Naive(props){
 
     return(
         <div>
-            <p>Pattern found at indices: </p>
+            <p className="results-title">Pattern found at indices: </p>
             {indices.join(", ")}
             <br></br>
             <br></br>
@@ -68,7 +68,7 @@ function Naive(props){
             })}
             <br></br>
             <br></br>
-            <p>It took {endTime - startTime} ms to complete using Naive Algorithm</p>
+            <p>It took {1/(endTime - startTime)} ms to complete using Naive Algorithm</p>
         </div>
     );
 }

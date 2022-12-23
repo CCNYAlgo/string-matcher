@@ -92,7 +92,7 @@ function RabinKarp(props)
             })}
             <br></br>
             <br></br> */}
-            <p>It took {endTime - startTime} ms to complete using Rabin-Karp Algorithm</p>
+            <p>It took {1/(endTime - startTime)} ms to complete using Rabin-Karp Algorithm</p>
         </div>
     );
 }

@@ -94,7 +94,7 @@ function FiniteAuto(props){
             })}
             <br></br>
             <br></br> */}
-            <p>It took {endTime - startTime} ms to complete using Finite Automaton Algorithm</p>
+            <p>It took {1/(endTime - startTime)} ms to complete using Finite Automaton Algorithm</p>
         </div>
     );
 }
