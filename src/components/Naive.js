@@ -9,7 +9,6 @@ function Naive(props){
 
     function search(txt, pat)
     {
-        startTime = performance.now();
 
         let M = pat.length;
         let N = txt.length;
@@ -30,15 +29,17 @@ function Naive(props){
                 shifts.push(i);
         }
 
-        endTime = performance.now();
-
         return shifts;
     }
 
     let txt = props.text;
     let pat = props.pattern;
     let patLen = pat.length;
+
+    startTime = performance.now();
     let indices = search(txt, pat);
+    endTime = performance.now();
+
     let substrings = [];
     let index = indices[0];
 

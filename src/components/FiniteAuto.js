@@ -1,10 +1,10 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 
 function FiniteAuto(props){
 
+    let startTime = 0;
+    let endTime = 0;
     let NO_OF_CHARS = 256;
-    const startTime = useRef(0);
-    const endTime = useRef(0);
 
     function getNextState(pat,M,state,x)
     {
@@ -47,60 +47,39 @@ function FiniteAuto(props){
     }
 
     // Driver code
-    useEffect(() => {
+    /* Prints all occurrences of pat in txt */
+    function search(pat, txt){
 
-        /* Prints all occurrences of pat in txt */
-        function search(pat, txt){
+        let M = pat.length;
+        let N = txt.length;
+        let shifts = [];
 
-            let M = pat.length;
-            let N = txt.length;
-            let shifts = [];
-
-            let TF = new Array(M+1);
-            for(let i=0;i<M+1;i++){
-                TF[i]=new Array(NO_OF_CHARS);
-                for(let j=0;j<NO_OF_CHARS;j++)
-                    TF[i][j]=0;
-            }
-
-            computeTF(pat, M, TF);
-
-            // Process txt over FA.
-            let i = 0; 
-            let state = 0;
-            for (i = 0; i < N; i++){
-                state = TF[state][txt[i].charCodeAt(0)];
-                if (state === M)
-                    shifts.push(i-M+1);
-            }
-
-            return shifts;
+        let TF = new Array(M+1);
+        for(let i=0;i<M+1;i++){
+            TF[i]=new Array(NO_OF_CHARS);
+            for(let j=0;j<NO_OF_CHARS;j++)
+                TF[i][j]=0;
         }
 
-        let pat = props.pattern.split("");
-        let txt = props.text.split("");
-        startTime.current = performance.now();
-        let indices = search(pat, txt);
-        endTime.current = performance.now();
-        let index = indices[0];
-        let substrings = [];
-        let txtString = props.text;
-        let patLen = props.pattern.length;
+        computeTF(pat, M, TF);
 
-        substrings.push(txtString.substring(0, index));
-        substrings.push(txtString.substring(index, index + patLen));
-        for(let i = 1; i < indices.length; i++){
-            index = indices[i];
-            let prev = indices[i-1] + patLen;
-    
-            substrings.push(txtString.substring(prev, index));
-            substrings.push(txtString.substring(index, index + patLen));
+        // Process txt over FA.
+        let i = 0; 
+        let state = 0;
+        for (i = 0; i < N; i++){
+            state = TF[state][txt[i].charCodeAt(0)];
+            if (state === M)
+                shifts.push(i-M+1);
         }
-    
-        index = indices[indices.length - 1] + patLen;
-        substrings.push(txtString.substring(index, txt.length));
 
-    });
+        return shifts;
+    }
+
+    let pat = props.pattern.split("");
+    let txt = props.text.split("");
+    startTime = performance.now();
+    let indices = search(pat, txt);
+    endTime = performance.now();
 
 
     return(
@@ -115,7 +94,7 @@ function FiniteAuto(props){
             })}
             <br></br>
             <br></br> */}
-            <p>It took {endTime.current - startTime.current} ms to complete using Finite Automaton Algorithm</p>
+            <p>It took {endTime - startTime} ms to complete using Finite Automaton Algorithm</p>
         </div>
     );
 }

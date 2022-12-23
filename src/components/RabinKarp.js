@@ -10,8 +10,6 @@ function RabinKarp(props)
 
     function search(txt, pat, q) 
     {
-        startTime = performance.now();
-
         let M = pat.length;
         let N = txt.length;
         let i;
@@ -55,15 +53,16 @@ function RabinKarp(props)
             }
         }
 
-        endTime = performance.now();
-
         return shifts;
     }
 
     let txt = props.text;
     let pat = props.pattern;
     let patLen = pat.length;
+
+    startTime = performance.now();
     let indices = search(txt, pat, q);
+    endTime = performance.now();
 
     let substrings = [];
     let index = indices[0];
