@@ -3,13 +3,15 @@ import React from "react";
 function RabinKarp(props) 
 {
     let startTime = 0;
-    let endTime = 0;
+    let elapsed = 0;
+    let runs = 100;
 
-    let q = 101; // prime number
+    let q = 251; // prime number
     let d = 256; // number of characters in the input alphabet
 
     function search(txt, pat, q) 
     {
+        startTime = performance.now();
         let M = pat.length;
         let N = txt.length;
         let i;
@@ -53,16 +55,18 @@ function RabinKarp(props)
             }
         }
 
+        elapsed += (performance.now() - startTime);
         return shifts;
     }
 
+    let indices;
     let txt = props.text;
     let pat = props.pattern;
 
-    startTime = performance.now();
-    let indices = search(txt, pat, q);
-    endTime = performance.now();
 
+    for (let i = 0; i < runs; i++)
+        indices = search(txt, pat, q);
+    elapsed = elapsed / runs;
 /*
     let patLen = pat.length;
     let substrings = [];
@@ -96,7 +100,7 @@ function RabinKarp(props)
                 })}
                 <br></br>
                 <br></br> */}
-                <p>It took {1/(endTime - startTime)} ms to complete using Rabin-Karp Algorithm</p>
+                <p>It took {elapsed} ms to complete using Rabin-Karp Algorithm</p>
             </div>
         );
     }

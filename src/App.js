@@ -34,6 +34,8 @@ function App() {
         {submitted && <Naive text={text} pattern={pattern} />}
         {submitted && <RabinKarp text={text} pattern={pattern} />}
         {submitted && <FiniteAuto text={text} pattern={pattern} />}
+        <br></br>
+        {submitted && <p>Runtimes are calculated as an average of 100 runs</p>}
     </div>
   );
 }

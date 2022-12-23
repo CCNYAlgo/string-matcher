@@ -3,7 +3,8 @@ import React from "react";
 function FiniteAuto(props){
 
     let startTime = 0;
-    let endTime = 0;
+    let elapsed = 0;
+    let runs = 100;
     let NO_OF_CHARS = 256;
 
     function getNextState(pat,M,state,x)
@@ -50,6 +51,7 @@ function FiniteAuto(props){
     /* Prints all occurrences of pat in txt */
     function search(pat, txt){
 
+        startTime = performance.now();
         let M = pat.length;
         let N = txt.length;
         let shifts = [];
@@ -71,16 +73,17 @@ function FiniteAuto(props){
             if (state === M)
                 shifts.push(i-M+1);
         }
-
+        elapsed += (performance.now() - startTime);
         return shifts;
     }
 
     let pat = props.pattern.split("");
     let txt = props.text.split("");
+    let indices;
 
-    startTime = performance.now();
-    let indices = search(pat, txt);
-    endTime = performance.now();
+    for (let i = 0; i < runs; i++)
+        indices = search(pat, txt);
+    elapsed = elapsed / runs;
 
 /*
     let patLen = pat.length;
@@ -116,7 +119,7 @@ function FiniteAuto(props){
                 })}
                 <br></br>
                 <br></br> */}
-                <p>It took {1/(endTime - startTime)} ms to complete using Finite Automaton Algorithm</p>
+                <p>It took {elapsed} ms to complete using Finite Automaton Algorithm</p>
             </div>
         );
     }

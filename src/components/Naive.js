@@ -3,13 +3,14 @@ import React from "react";
 function Naive(props){
 
     let startTime = 0;
-    let endTime = 0;
+    let elapsed = 0;
+    let runs = 100;
 
     // Javascript program for Naive Pattern Searching
 
     function search(txt, pat)
     {
-
+        startTime = performance.now();
         let M = pat.length;
         let N = txt.length;
         let shifts = [];
@@ -29,15 +30,17 @@ function Naive(props){
                 shifts.push(i);
         }
 
+        elapsed += (performance.now() - startTime);
         return shifts;
     }
 
+    let indices;
     let txt = props.text;
     let pat = props.pattern;
 
-    startTime = performance.now();
-    let indices = search(txt, pat);
-    endTime = performance.now();
+    for (let i = 0; i < runs; i++)
+        indices = search(txt, pat);
+    elapsed = elapsed / runs;
 
     let patLen = pat.length;
     let substrings = [];
@@ -65,7 +68,7 @@ function Naive(props){
     else {
         return(
             <div>
-                <p className="results-title">Pattern found at indices: </p>
+                <p className="results-title">Pattern found {indices.length} times at indices: </p>
                 {indices.join(", ")}
                 <br></br>
                 <br></br>
@@ -75,7 +78,7 @@ function Naive(props){
                 })}
                 <br></br>
                 <br></br>
-                <p>It took {1/(endTime - startTime)} ms to complete using Naive Algorithm</p>
+                <p>It took {elapsed} ms to complete using Naive Algorithm</p>
             </div>
         );
     }
